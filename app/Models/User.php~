@@ -52,11 +52,6 @@ class User extends Authenticatable
             ->implode('');
     }
 
-    public function latestOrder()
-    {
-        return $this->hasOne(Order::class)->latestOfMany();
-    }
-
     /**
      * Get the attributes that should be cast.
      *
@@ -69,5 +64,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
 }

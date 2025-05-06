@@ -14,6 +14,26 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+
+                    <flux:navlist.item
+                        icon="credit-card"
+                        :href="route('pricing')"
+                        :current="request()->routeIs('pricing')"
+                        wire:navigate
+                    >
+                        {{ __('Pricing') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item
+                        icon="document-text"
+                        :href="route('orders.index')"
+                        :current="request()->routeIs('orders.index')"
+                        wire:navigate
+                    >
+                        {{ __('Orders') }}
+                    </flux:navlist.item>
+
+
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -56,6 +76,16 @@
                             </div>
                         </div>
                     </flux:menu.radio.group>
+
+                    <flux:menu.separator />
+
+                    @if (auth()->user()->latestOrder)
+                        <div class="mt-4 p-4 bg-white rounded shadow">
+                            <p><strong>Plan:</strong> {{ auth()->user()->latestOrder->plan->name }}</p>
+                        </div>
+                    @else
+                        <p class="text-gray-500">Je hebt nog geen abonnement.</p>
+                    @endif
 
                     <flux:menu.separator />
 

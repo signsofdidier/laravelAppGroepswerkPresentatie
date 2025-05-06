@@ -55,15 +55,7 @@ Route::get('/checkout/success/{plan}', function (Plan $plan) {
 Route::middleware(['auth', 'check.plan'])->group(function () {
     Route::get('/orders', \App\Livewire\Orders\ShowOrders::class)->name('orders.index');
 
-    Route::get('/orders/{order}/download', function (\App\Models\Order $order) {
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('livewire.orders.orderPDF', [
-            'order' => $order,
-            'user' => Auth::user(),
-        ]);
-
-        return $pdf->download("order-{$order->stripe_transaction_id}.pdf");
-    })->name('orders.download');
-
+    
 });
 
 
